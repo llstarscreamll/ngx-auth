@@ -8,6 +8,7 @@ From the Hello-Angular root folder:
 
 ```bash
 npm i --save angular2-jwt
+npm i --save @ngx-translate/core
 git clone https://github.com/llstarscreamll/ngx-auth.git src/app/auth
 ```
 

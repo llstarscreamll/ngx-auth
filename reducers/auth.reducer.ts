@@ -69,3 +69,33 @@ export const user = (state: State) => state.user;
 export const loading = (state: State) => state.loading;
 export const messages = (state: State) => state.messages;
 export const isLoggedIn = (state: State) => state.loggedIn;
+
+/** -----------------------------------------------------------------------------
+Don't forget to import this reducer and selector on the main app reducer!!
+
+import * as fromAuth from './auth/reducers/auth.reducer';
+
+export interface State {
+  auth: fromAuth.State;
+}
+
+const reducers = {
+  auth: fromAuth.reducer,
+}
+
+export function rootReducer(state: any, action: any) {
+  if (action.type === authActions.LOGOUT_SUCCESS) {
+    state = undefined;
+  }
+
+  return reducer(state, action);
+}
+
+// Auth Selectors
+export const getAuthState = (state: State) => state.auth;
+export const getAuthUser = createSelector(getAuthState, fromAuth.user);
+export const getAuthIsLoggedIn = createSelector(getAuthState, fromAuth.isLoggedIn);
+export const getAuthMessages = createSelector(getAuthState, fromAuth.messages);
+export const getAuthLoading = createSelector(getAuthState, fromAuth.loading);
+
+----------------------------------------------------------------------------- */

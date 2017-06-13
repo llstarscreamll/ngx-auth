@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     let loggedIn = this.authService.loggedIn();
 
     if (!loggedIn) {
-      // TODO: flash message informing that user is unauthorized
+      // TODO: flash message informing that "User must be logged in" 
       this.store.dispatch(go(['/auth/login']));
     }
 

@@ -1,0 +1,55 @@
+<app-middle-box-layout>
+  <h3 class="text-center" translate>AUTH.Login</h3>
+
+  <app-alerts [appMessage]="messages$ | async"></app-alerts>
+  
+   <form novalidate
+         [formGroup]="loginForm"
+         (ngSubmit)="onSubmit()">
+
+      <div class="form-group has-feedback"
+           [class.has-error]="emailErrors.showErrors">
+        <input type="email"
+               name="email"
+               class="form-control"
+               placeholder="{{ 'AUTH.Email' | translate }}"
+               formControlName="email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        
+        <validation-errors
+          #emailErrors="validationErrors"
+          [reactiveForm]="loginForm"
+          controlName="email"
+          [apiErrors]="(messages$ | async)?.errors"></validation-errors>
+      </div>
+
+      <div class="form-group has-feedback"
+        [class.has-error]="passwordErrors.showErrors">
+        <input type="password"
+               name="password"
+               class="form-control"
+               placeholder="{{ 'AUTH.Password' | translate }}"
+               formControlName="password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        
+        <validation-errors
+          #passwordErrors="validationErrors"
+          [reactiveForm]="loginForm"
+          controlName="password"
+          [apiErrors]="(messages$ | async)?.errors"></validation-errors>
+      </div>
+
+      <div class="form-group">
+        <button type="submit"
+          class="btn btn-primary btn-lg btn-block btn-flat"
+          [disabled]="loginForm.invalid || (loading$ | async)"
+          translate>AUTH.Sign In</button>
+      </div>
+
+    </form>
+
+    <a routerLink="/auth/register" translate>AUTH.Register</a>
+    <div class="clearfix"></div>
+    <a routerLink="/front/landing" translate>AUTH.Go to Lading Page</a>
+  
+</app-middle-box-layout>

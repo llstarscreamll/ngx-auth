@@ -1,0 +1,92 @@
+<app-middle-box-layout>
+  <h3 class="text-center" translate>AUTH.Register</h3>
+
+  <form [formGroup]="account" (ngSubmit)="submitForm()">
+
+    <app-alerts [appMessage]="messages$ | async"></app-alerts>
+
+    <div class="form-group has-feedback"
+      [class.has-error]="nameErrors.showErrors">
+      <input formControlName="name" type="text" class="form-control" placeholder="{{ 'AUTH.Full name' | translate}}">
+      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      
+      <validation-errors
+        #nameErrors="validationErrors"
+        [reactiveForm]="account"
+        controlName="name"
+        [apiErrors]="(messages$ | async)?.errors"
+      ></validation-errors>
+    </div>
+
+    <div class="form-group has-feedback"
+      [class.has-error]="emailErrors.showErrors">
+      <input formControlName="email" type="email" class="form-control" placeholder="{{ 'AUTH.Email' | translate}}">
+      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+      <validation-errors
+        #emailErrors="validationErrors"
+        [reactiveForm]="account"
+        controlName="email"
+        [apiErrors]="(messages$ | async)?.errors"
+      ></validation-errors>
+    </div>
+
+    <div class="form-group has-feedback"
+      [class.has-error]="passwordErrors.showErrors">
+      <input formControlName="password" type="password" class="form-control" placeholder="{{ 'AUTH.Password' | translate}}">
+      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+      <validation-errors
+        #passwordErrors="validationErrors"
+        [reactiveForm]="account"
+        controlName="password"
+        [apiErrors]="(messages$ | async)?.errors"
+      ></validation-errors>
+    </div>
+
+    <div class="form-group has-feedback"
+      [class.has-error]="passwordConfirmationErrors.showErrors">
+      <input formControlName="password_confirmation" type="password" class="form-control" placeholder="{{ 'AUTH.Retype password' | translate}}">
+      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+      <validation-errors
+        #passwordConfirmationErrors="validationErrors"
+        [reactiveForm]="account"
+        controlName="password_confirmation"
+        [apiErrors]="(messages$ | async)?.errors"
+      ></validation-errors>
+    </div>
+
+    <div class="form-group has-feedback"
+      [class.has-error]="agreeTermsErrors.showErrors">
+      <div class="checkbox">
+        <label>
+          <input formControlName="agree_terms" type="checkbox" translate> <span [innerHTML]="'AUTH.I agree to the terms' | translate:{link:'#'}"></span>
+        </label>
+      </div>
+
+      <validation-errors
+        #agreeTermsErrors="validationErrors"
+        [reactiveForm]="account"
+        controlName="agree_terms"
+        [apiErrors]="(messages$ | async)?.errors"
+      ></validation-errors>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <button
+          type="submit"
+          [disabled]="!account.valid"
+          class="btn btn-lg btn-primary btn-block btn-flat"
+          translate>AUTH.Create Account</button>
+      </div>
+    </div>
+
+  </form>
+
+  <a routerLink="/auth/login" translate>AUTH.Already have an account?</a>
+  <div class="clearfix"></div>
+  <a routerLink="/front/landing" translate>AUTH.Go to Lading Page</a>
+
+</app-middle-box-layout>

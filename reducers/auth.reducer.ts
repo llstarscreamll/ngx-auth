@@ -1,7 +1,7 @@
 import * as authActions from '../actions/auth.actions';
 
 import { AuthUser } from './../models/authUser';
-import { AppMessage } from "app/core/models/appMessage";
+import { AppMessage } from 'app/core/models/appMessage';
 
 export interface State {
   user: AuthUser | null;
@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: authActions.Actions): Stat
     }
 
     case authActions.LOGIN_SUCCESS: {
-      let user = action.payload as AuthUser;
+      const user = action.payload as AuthUser;
       return { ...state, loggedIn: true, loading: false, user: user, }
     };
 
@@ -48,8 +48,8 @@ export function reducer(state = initialState, action: authActions.Actions): Stat
       // exists messages must have been shown at least for 2 seconds
       // before they can be removed
       if (state.messages && state.messages.date && !msg) {
-        let endTime = new Date().getTime();
-        let startTime = state.messages.date.getTime();
+        const endTime = new Date().getTime();
+        const startTime = state.messages.date.getTime();
 
         // at least 2 seconds must have happened to set the messages no null
         msg = ((endTime - startTime) / 1000 > 2) ? msg : state.messages;

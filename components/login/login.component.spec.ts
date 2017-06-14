@@ -11,7 +11,7 @@ import { LoginComponent } from './login.component';
 import { IMPORTS } from './../../../core/tests/util';
 import * as authActions from './../../actions/auth.actions';
 import * as fromRoot from './../../../reducers';
-import { VALIDATION_TESTING_COMPONENTS } from "app/validation/utils/validation-testing-utils";
+import { VALIDATION_TESTING_COMPONENTS } from 'app/validation/utils/validation-testing-utils';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -38,7 +38,7 @@ describe('LoginComponent', () => {
   });
 
   it('should have certain elements', () => {
-    let html = fixture.nativeElement;
+    const html = fixture.nativeElement;
 
     // alert component to show errors
     expect(html.querySelector('app-alerts')).toBeTruthy('should have app-alerts cmp');
@@ -55,7 +55,7 @@ describe('LoginComponent', () => {
   });
 
   it('should dispatch store action when submit form login', fakeAsync(() => {
-    let credentials = {
+    const credentials = {
       email: 'john@doe.com',
       password: 'john.123'
     };
@@ -63,7 +63,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     tick();
 
-    let html = fixture.nativeElement;
+    const html = fixture.nativeElement;
 
     // fields should be empty and button disabled, the form is invalid
     expect(component.loginForm.valid).toBe(false, 'form is invalid');
@@ -82,7 +82,7 @@ describe('LoginComponent', () => {
     // the form is now valid
     expect(html.querySelector('form button[type=submit]:disabled')).toBeFalsy('form submit btn enabled');
     expect(component.loginForm.valid).toBe(true, 'the form is now valid');
-    
+
     html.querySelector('form button[type=submit]').click();
 
     fixture.detectChanges();

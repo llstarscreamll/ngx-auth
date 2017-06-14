@@ -6,7 +6,7 @@ import { environment } from './../../environments/environment';
 
 import { AuthService } from './services/auth.service';
 import { AuthEffects } from './effects/auth.effects';
-import { CoreSharedModule } from "app/core/core.shared.module";
+import { CoreSharedModule } from 'app/core/core.shared.module';
 
 import { ES } from './translations/es';
 import { COMPONENTS } from './components';

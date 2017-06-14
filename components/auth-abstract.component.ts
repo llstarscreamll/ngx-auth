@@ -1,9 +1,9 @@
-import { Store } from "@ngrx/store";
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from './../../reducers';
 import * as authActions from './../actions/auth.actions';
-import { AppMessage } from "app/core/models/appMessage";
+import { AppMessage } from 'app/core/models/appMessage';
 
 export abstract class AuthAbstractComponent {
 

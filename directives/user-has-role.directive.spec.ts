@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable'
 import * as fromRoot from './../../reducers';
 import { TEST_USER, setupConnections, IMPORTS } from './../../core/tests/util';
 import { UserHasRoleDirective } from './user-has-role.directive';
-import { LocalStorageService } from "app/core/services/local-storage.service";
+import { LocalStorageService } from 'app/core/services/local-storage.service';
 
 @Component({
   selector: 'test-cmp',
@@ -57,7 +57,7 @@ describe('UserHasRoleDirective', () => {
   /**
    * Override the component template.
    */
-  let overrideCmpTemplate = (template) => {
+  const overrideCmpTemplate = (template) => {
     TestBed.overrideComponent(TestCmp, {
       set: {
         template: template,
@@ -68,7 +68,7 @@ describe('UserHasRoleDirective', () => {
   /**
    * Render the component.
    */
-  let renderCmp = (user = null) => {
+  const renderCmp = (user = null) => {
     fixture = getTestBed().createComponent(TestCmp);
     component = fixture.componentInstance;
     localStorageService = getTestBed().get(LocalStorageService);

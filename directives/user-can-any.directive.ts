@@ -1,8 +1,8 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
 
 import { AuthUser } from './../models/authUser';
-import { AuthService } from "app/auth/services/auth.service";
-import { LocalStorageService } from "app/core/services/local-storage.service";
+import { AuthService } from 'app/auth/services/auth.service';
+import { LocalStorageService } from 'app/core/services/local-storage.service';
 
 @Directive({
   selector: '[userCanAny]',
@@ -28,7 +28,7 @@ export class UserCanAnyDirective implements OnInit {
   }
 
   private handleVisualization() {
-    let user = this.localStorageService.getUser();
+    const user = this.localStorageService.getUser();
 
     if ((user && user.userCanAny(this.userCanAny)) || this.userCanAny.length === 0) {
       this.rendered.setStyle(this.elem.nativeElement, 'display', '');

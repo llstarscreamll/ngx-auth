@@ -8,16 +8,16 @@ import { UserHasAnyRoleDirective } from "app/auth/directives/user-has-any-role.d
 import { UserHasRoleDirective } from "app/auth/directives/user-has-role.directive";
 
 const DIRECTIVES = [
-    UserCanAllDirective,
-    UserCanAnyDirective,
-    UserCanDirective,
-    UserHasAllRolesDirective,
-    UserHasAnyRoleDirective,
-    UserHasRoleDirective,
+  UserCanAllDirective,
+  UserCanAnyDirective,
+  UserCanDirective,
+  UserHasAllRolesDirective,
+  UserHasAnyRoleDirective,
+  UserHasRoleDirective,
 ];
 
 @NgModule({
-    declarations: [...DIRECTIVES],
-    exports: [...DIRECTIVES],
+  declarations: [...DIRECTIVES],
+  exports: [...DIRECTIVES],
 })
 export class AuthSharedModule { }

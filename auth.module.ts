@@ -1,35 +1,23 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
-// Theme
+import { TranslateService } from '@ngx-translate/core';
+
 import { environment } from './../../environments/environment';
-// Routing
-import { AuthRoutingModule } from './auth-routing.module';
-// Components
-import { COMPONENTS } from './components';
-// Services
+
 import { AuthService } from './services/auth.service';
-// Language files
-import { ES } from './translations/es';
-// Effects
 import { AuthEffects } from './effects/auth.effects';
-import { CoreSharedModule } from "app/core/core.shared.module";
-import { ValidationSharedModule } from "app/validation/validation.shared.module";
+import { CoreSharedModule } from 'app/core/core.shared.module';
+
+import { ES } from './translations/es';
+import { COMPONENTS } from './components';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
-    TranslateModule,
-    environment.theme,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    EffectsModule.run(AuthEffects),
     CoreSharedModule,
-    ValidationSharedModule,
+    AuthRoutingModule,
+    environment.theme,
+    EffectsModule.run(AuthEffects),
   ],
   declarations: [...COMPONENTS],
   providers: [AuthService]

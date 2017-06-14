@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable'
 
 import * as fromRoot from './../../reducers';
 import { TEST_USER, setupConnections, IMPORTS } from './../../core/tests/util';
-import { LocalStorageService } from "app/core/services/local-storage.service";
+import { LocalStorageService } from 'app/core/services/local-storage.service';
 
 import { UserCanDirective } from './user-can.directive';
 
@@ -58,7 +58,7 @@ describe('UserCanDirective', () => {
   /**
    * Override the component template.
    */
-  let overrideCmpTemplate = (template) => {
+  const overrideCmpTemplate = (template) => {
     TestBed.overrideComponent(TestCmp, {
       set: {
         template: template,
@@ -69,7 +69,7 @@ describe('UserCanDirective', () => {
   /**
    * Render the component.
    */
-  let renderCmp = (user = null) => {
+  const renderCmp = (user = null) => {
     fixture = getTestBed().createComponent(TestCmp);
     component = fixture.componentInstance;
     localStorageService = getTestBed().get(LocalStorageService);

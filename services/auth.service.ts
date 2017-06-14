@@ -15,10 +15,10 @@ import { Account } from './../models/account';
 @Injectable()
 export class AuthService extends AbstractService {
 
-  protected API_ENDPOINT: string = 'v1/user';
-  public loginRoute: string = 'v1/clients/web/admin/login';
-  public registerRoute: string = "v1/register";
-  public loginFromLocalStorage: boolean = false;
+  protected API_ENDPOINT = 'v1/user';
+  public loginRoute = 'v1/clients/web/admin/login';
+  public registerRoute = 'v1/register';
+  public loginFromLocalStorage = false;
 
   public constructor(
     private http: Http,
@@ -32,12 +32,12 @@ export class AuthService extends AbstractService {
    */
   public login(email: string, password: string): Observable<AccessToken> {
     this.loginFromLocalStorage = false;
-    let endPoint = this.domain + this.loginRoute;
+    const endPoint = this.domain + this.loginRoute;
 
     return this.http
       .post(endPoint, { 'email': email, 'password': password }, this.headers)
       .map(res => {
-        let accessToken: AccessToken = res.json();
+        const accessToken: AccessToken = res.json();
         return accessToken;
       })
       .catch(this.handleError);
@@ -48,7 +48,7 @@ export class AuthService extends AbstractService {
    * @param account
    */
   public registerUser(account: Account): Observable<any> {
-    let endPoint = this.domain + this.registerRoute;
+    const endPoint = this.domain + this.registerRoute;
 
     return this.http
       .post(endPoint, account, this.headers)

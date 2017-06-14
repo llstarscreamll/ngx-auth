@@ -15,10 +15,10 @@ export class AuthGuard implements CanActivate {
     private store: Store<fromRoot.State>) { }
 
   canActivate(): boolean {
-    let loggedIn = this.authService.loggedIn();
+    const loggedIn = this.authService.loggedIn();
 
     if (!loggedIn) {
-      // TODO: flash message informing that "User must be logged in" 
+      // TODO: flash message informing that "User must be logged in"
       this.store.dispatch(go(['/auth/login']));
     }
 

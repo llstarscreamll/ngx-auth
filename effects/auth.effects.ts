@@ -71,7 +71,7 @@ export class AuthEffects {
     .map((action) => action.payload as AuthUser)
     .do((user: AuthUser) => this.localStorageService.setUser(user))
     .mergeMap(() => {
-      let actions: Action[] = [];
+      const actions: Action[] = [];
 
       // redirect user if isn't login from local storage
       if (!this.authService.loginFromLocalStorage) {

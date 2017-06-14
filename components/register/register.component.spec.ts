@@ -2,13 +2,13 @@
 import { async, ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { Store } from "@ngrx/store";
+import { Store } from '@ngrx/store';
 
 import { IMPORTS } from './../../../core/tests/util';
 import * as authActions from './../../actions/auth.actions';
 
 import { RegisterComponent } from './register.component';
-import { VALIDATION_TESTING_COMPONENTS } from "app/validation/utils/validation-testing-utils";
+import { VALIDATION_TESTING_COMPONENTS } from 'app/validation/utils/validation-testing-utils';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -35,7 +35,7 @@ describe('RegisterComponent', () => {
   });
 
   it('should have certain elements', () => {
-    let html = fixture.nativeElement;
+    const html = fixture.nativeElement;
 
     // alert component to show errors
     expect(html.querySelector('app-alerts')).toBeTruthy('should have app-alerts cmp');
@@ -69,7 +69,7 @@ describe('RegisterComponent', () => {
     expect(component.account.valid).toBe(false, 'account reactive form invalid');
     expect(fixture.nativeElement.querySelector('form button:disabled')).toBeTruthy('form submit button disabled');
 
-    let account = {
+    const account = {
       name: 'John Doe',
       email: 'john@doe.com',
       password: 'john.123',
@@ -82,7 +82,7 @@ describe('RegisterComponent', () => {
     component.account.markAsDirty();
     component.account.markAsTouched();
 
-    let store = fixture.debugElement.injector.get(Store);
+    const store = fixture.debugElement.injector.get(Store);
     spyOn(store, 'dispatch');
 
     fixture.detectChanges();

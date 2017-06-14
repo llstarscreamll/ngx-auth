@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { AuthUser } from './../models/authUser';
 import { Account } from './../models/account';
 import { LoginCredentials } from './../models/loginCredentials';
-import { AppMessage } from "app/core/models/appMessage";
+import { AppMessage } from 'app/core/models/appMessage';
 
 export const LOGIN = '[Auth] Login';
 export const LOGIN_FROM_LOCALSTORAGE = '[Auth] Login From LocalStorage';

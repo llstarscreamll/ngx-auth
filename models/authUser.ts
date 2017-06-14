@@ -33,10 +33,10 @@ export class AuthUser {
 
   /**
    * Check if user has a specific role.
-   * @param string role 
+   * @param string role
    */
   public hasRole(role: string): boolean {
-    let hasTheRole: boolean = false;
+    let hasTheRole = false;
 
     this.roles && this.roles.data.forEach(item => {
       if (item.name === role) {
@@ -50,10 +50,10 @@ export class AuthUser {
 
   /**
    * Chek if user has at least one of the given roles.
-   * @param Array<string> roles 
+   * @param Array<string> roles
    */
   public hasAnyRole(roles: Array<string>): boolean {
-    let hasTheRole: boolean = false;
+    let hasTheRole = false;
 
     this.roles && this.roles.data.forEach(item => {
       if (roles.indexOf(item.name) > -1) {
@@ -67,10 +67,10 @@ export class AuthUser {
 
   /**
    * Check if user has all the given roles.
-   * @param Array<roles> roles 
+   * @param Array<roles> roles
    */
   public hasAllRoles(roles: Array<string>): boolean {
-    let rolesFound: number = 0;
+    let rolesFound = 0;
 
     this.roles && this.roles.data.forEach(item => {
       if (roles.indexOf(item.name) > -1) {
@@ -83,10 +83,10 @@ export class AuthUser {
 
   /**
    * Check if user has specific permission.
-   * @param string permission 
+   * @param string permission
    */
   public userCan(permission: string): boolean {
-    let hasPermission: boolean = false;
+    let hasPermission = false;
 
     this.roles && this.roles.data.forEach(role => {
       role.permissions.data.forEach(perm => {
@@ -107,10 +107,10 @@ export class AuthUser {
 
   /**
    * Check if user has any of the given permissions.
-   * @param Array<string> permissions 
+   * @param Array<string> permissions
    */
   public userCanAny(permissions: Array<string>): boolean {
-    let hasPermission: boolean = false;
+    let hasPermission = false;
 
     this.roles && this.roles.data.forEach(role => {
       role.permissions.data.forEach(perm => {
@@ -131,10 +131,10 @@ export class AuthUser {
 
   /**
    * Check if user has all the given permissions.
-   * @param Array<string> permissions 
+   * @param Array<string> permissions
    */
   public userCanAll(permissions: Array<string>): boolean {
-    let permissionsFound: number = 0;
+    let permissionsFound = 0;
 
     this.roles && this.roles.data.forEach(role => {
       role.permissions.data.forEach(perm => {

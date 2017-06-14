@@ -15,7 +15,7 @@ describe('Auth Service', () => {
   let service: AuthService;
   let backend: MockBackend;
   let userData;
-  let accessToken: AccessToken = {
+  const accessToken: AccessToken = {
     access_token: 'sometoken',
     expires_in: 123456789,
     token_type: 'Bearer'
@@ -46,7 +46,7 @@ describe('Auth Service', () => {
   });
 
   it('should call the API to log in the user on server and obtain access toekn', () => {
-    let response = {
+    const response = {
       body: accessToken,
       status: 200
     };
@@ -77,7 +77,7 @@ describe('Auth Service', () => {
   });
 
   it('should call the API to retrieve the authenticated user data', () => {
-    let response = {
+    const response = {
       body: { data: userData },
       status: 200
     };
@@ -95,7 +95,7 @@ describe('Auth Service', () => {
   });
 
   it('should call the API to logout the user', () => {
-    let response = {
+    const response = {
       body: { message: 'Token revoked successfully.' },
       status: 200
     };
@@ -113,7 +113,7 @@ describe('Auth Service', () => {
   });
 
   it('should handle errors from API', () => {
-    let response = {
+    const response = {
       message: 'Credentials Incorrect.',
       status_code: 401
     };

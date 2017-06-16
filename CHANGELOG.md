@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.1.1 (2017-06-16)
+
+### Added
+
+- Add english translations.
+
 ## 0.1.1 (2017-06-13)
 
 ### Added

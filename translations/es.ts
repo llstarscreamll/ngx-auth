@@ -12,7 +12,6 @@ export const ES = {
 		'Password': 'Contraseña',
 		'Retype password': 'Confirmar Contraseña',
 		'I agree to the terms': 'Acepto los <a href="{{ link }}">términos</a>',
-		'Remember Me': 'Recuerdame',
 		// buttons
 		'Sign In': 'Entrar',
 		'Create Account': 'Crear',

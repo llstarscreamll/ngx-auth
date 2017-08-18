@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
-import { environment } from './../../environments/environment';
+import { THEME } from './../themes';
 
 import { AuthService } from './services/auth.service';
 import { AuthEffects } from './effects/auth.effects';
@@ -17,7 +17,7 @@ import { AuthRoutingModule } from './auth-routing.module';
   imports: [
     CoreSharedModule,
     AuthRoutingModule,
-    environment.theme,
+    THEME.default,
     EffectsModule.run(AuthEffects),
   ],
   declarations: [...COMPONENTS],

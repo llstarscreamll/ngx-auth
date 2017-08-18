@@ -25,12 +25,6 @@ import { AccessToken } from './../interfaces/accessToken';
 @Injectable()
 export class AuthEffects {
 
-  public constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private localStorageService: LocalStorageService
-  ) { }
-
   @Effect()
   logIn$: Observable<Action> = this.actions$
     .ofType(authActions.LOGIN)
@@ -43,9 +37,8 @@ export class AuthEffects {
         .switchMap(() => this.authService.getUser())
         .map((user: AuthUser) => { return new authActions.LoginSuccessAction(user); })
         .catch((error) => {
-          error.type = 'danger';
-          this.localStorageService.clear();
-          return of(new authActions.SetMessagesAction(error));
+          const errorFormated = Object.assign({}, error, { type: 'danegr'});
+          return of(new authActions.SetMessagesAction(errorFormated));
         })
     });
 
@@ -61,7 +54,7 @@ export class AuthEffects {
         })
         .catch(error => {
           this.localStorageService.clear();
-          return empty();
+          return [];
         });
     });
 
@@ -129,4 +122,10 @@ export class AuthEffects {
         ? go(['/auth/login'])
         : empty();
     });
+
+  public constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private localStorageService: LocalStorageService
+  ) { }
 }

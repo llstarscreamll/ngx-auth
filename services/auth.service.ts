@@ -27,15 +27,25 @@ export class AuthService extends AbstractService {
     super();
   }
 
+  public checkIfDomainExists(subdomain: string): Observable<string> {
+    const endPoint = this.domain + 'v1/' + 'check-if-subdomain-exists';
+
+    return this.http
+      .post(endPoint, { subdomain: subdomain }, { headers: this.headers })
+      .map(res => { return res.json(); })
+      .catch(this.handleError);
+  }
+
   /**
    * Process the login request to the API.
    */
   public login(email: string, password: string): Observable<AccessToken> {
     this.loginFromLocalStorage = false;
     const endPoint = this.domain + this.loginRoute;
+    this.addDomainHeader();
 
     return this.http
-      .post(endPoint, { 'email': email, 'password': password }, this.headers)
+      .post(endPoint, { 'email': email, 'password': password }, { headers: this.headers })
       .map(res => {
         const accessToken: AccessToken = res.json();
         return accessToken;
@@ -51,7 +61,7 @@ export class AuthService extends AbstractService {
     const endPoint = this.domain + this.registerRoute;
 
     return this.http
-      .post(endPoint, account, this.headers)
+      .post(endPoint, account, { headers: this.headers })
       .map(res => res.json().data)
       .catch(this.handleError);
   }

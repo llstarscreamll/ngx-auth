@@ -1,0 +1,39 @@
+<app-middle-box-layout>
+  <h3 class="text-center" translate>AUTH.Login</h3>
+
+  <app-alerts [appMessage]="messages$ | async"></app-alerts>
+  
+   <form novalidate
+         [formGroup]="form"
+         (ngSubmit)="onSubmit()">
+
+      <div class="form-group form-group-lg"
+           [class.has-error]="subdomainErrors.showErrors">
+        <input type="text"
+               id="subdomain"
+               class="form-control"
+               placeholder="{{ 'AUTH.subdomain' | translate }}"
+               formControlName="subdomain">
+        <label id="subdomain-label" class="control-label">.slabwebservices.com</label>
+        
+        <validation-errors
+          #subdomainErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="subdomain"
+          [apiErrors]="(messages$ | async)?.errors"></validation-errors>
+      </div>
+
+      <div class="form-group">
+        <button type="submit"
+          class="btn btn-primary btn-lg btn-block btn-flat"
+          [disabled]="form.invalid || (loading$ | async)"
+          translate>AUTH.Sign In</button>
+      </div>
+
+    </form>
+
+    <a routerLink="/auth/register" translate>AUTH.Register</a>
+    <div class="clearfix"></div>
+    <a routerLink="/front/landing" translate>AUTH.Go to Lading Page</a>
+  
+</app-middle-box-layout>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
 import { go } from '@ngrx/router-store';
 import { of } from 'rxjs/observable/of';
 import { empty } from 'rxjs/observable/empty';
-
-import * as authActions from './../actions/auth.actions';
-
 import { Actions, Effect } from '@ngrx/effects';
 
+import { environment } from './../../../environments/environment';
+
+import * as fromRoot from './../../reducers';
+import * as authActions from './../actions/auth.actions';
 import { AuthService } from './../services/auth.service';
 import { LocalStorageService } from './../.././core/services/local-storage.service';
 import { LoginCredentials } from './../models/loginCredentials';
@@ -21,9 +22,53 @@ import { AuthUser } from './../models/authUser';
 import { Account } from './../models/account';
 
 import { AccessToken } from './../interfaces/accessToken';
+import { DomainService } from 'app/core/services/domain.service';
 
 @Injectable()
 export class AuthEffects {
+
+  public ENV = environment;
+
+  @Effect()
+  checkIfSubdomainExists$: Observable<Action> = this.actions$
+    .ofType(authActions.CHECK_IF_SUBDOMAIN_EXISTS)
+    .map((action: Action) => action.payload)
+    .switchMap((domain) => {
+      return this.authService.checkIfDomainExists(domain)
+        .map(domain => { return new authActions.SetSubdoaminAction(domain); })
+        .catch((error) => {
+          const errorFormated = Object.assign({}, error, { type: 'danger' });
+          return of(new authActions.SetMessagesAction(errorFormated));
+        })
+    });
+
+  @Effect()
+  setSubdomain$: Observable<Action> = this.actions$
+    .ofType(authActions.SET_SUBDOMAIN)
+    .withLatestFrom(this.store.select(fromRoot.getAuthState))
+    .mergeMap(([action, state]) => {
+      const subdomain = action.payload;
+      const actions: Action[] = [];
+
+      // if domain exists, redirect to that page with domain
+      if (subdomain && subdomain !== '') {
+
+        console.log('state subdomain = ', state.subdomain);
+        let redirect_host = subdomain + '.' + window.location.hostname;
+
+        if (this.ENV.production === false) {
+          redirect_host = redirect_host + ':4200';
+        }
+
+        // window.location.href = redirect_host;
+        window.location.replace('http://' + redirect_host + '/auth/login');
+
+      } else {
+        actions.push(go(['/auth/sign-in']));
+      }
+
+      return actions;
+    });
 
   @Effect()
   logIn$: Observable<Action> = this.actions$
@@ -37,15 +82,16 @@ export class AuthEffects {
         .switchMap(() => this.authService.getUser())
         .map((user: AuthUser) => { return new authActions.LoginSuccessAction(user); })
         .catch((error) => {
-          const errorFormated = Object.assign({}, error, { type: 'danegr'});
+          const errorFormated = Object.assign({}, error, { type: 'danger' });
           return of(new authActions.SetMessagesAction(errorFormated));
         })
     });
 
- @Effect()
+  @Effect()
   loginFromLocalStorage$: Observable<Action> = this.actions$
     .ofType(authActions.LOGIN_FROM_LOCALSTORAGE)
     .startWith(new authActions.LoginFromLocalStorageAction(null))
+    .do(() => this.localStorageService.setSubdomain(this.domainService.getDomainData().subdomain))
     .switchMap(() => {
       return this.authService.getUser()
         .map((user: AuthUser) => {
@@ -117,15 +163,17 @@ export class AuthEffects {
     .ofType(authActions.LOGOUT_SUCCESS)
     .do(() => this.localStorageService.clear())
     .map((action: Action) => action.payload)
-    .map((redirect: boolean) => {
+    .mergeMap((redirect: boolean) => {
       return redirect
-        ? go(['/auth/login'])
-        : empty();
+        ? [go(['/auth/login'])]
+        : [];
     });
 
   public constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private localStorageService: LocalStorageService
+    private store: Store<fromRoot.State>,
+    private localStorageService: LocalStorageService,
+    private domainService: DomainService,
   ) { }
 }

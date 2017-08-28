@@ -13,6 +13,12 @@ export const CREATE_ACCOUNT_SUCCESS = '[Auth] Create Account Success';
 export const LOGOUT = '[Auth] Logout';
 export const LOGOUT_SUCCESS = '[Auth] Logout Success';
 export const SET_MESSAGES = '[Auth] Set Messages';
+/**
+ * TODO:
+ * Maybe this actions needs to be moved to more meaning place!!
+ */
+export const SET_SUBDOMAIN = '[Auth] Set subdomain';
+export const CHECK_IF_SUBDOMAIN_EXISTS = '[Auth] Check if subdomain exists';
 
 export class LoginAction implements Action {
   readonly type = LOGIN;
@@ -54,6 +60,16 @@ export class SetMessagesAction implements Action {
   constructor(public payload: AppMessage = null) { }
 }
 
+export class SetSubdoaminAction implements Action {
+  readonly type = SET_SUBDOMAIN;
+  constructor(public payload: string = null) { }
+}
+
+export class CheckIfSubdoaminExistsAction implements Action {
+  readonly type = CHECK_IF_SUBDOMAIN_EXISTS;
+  constructor(public payload: string) { }
+}
+
 export type Actions
   = LoginAction
   | LoginFromLocalStorageAction
@@ -62,4 +78,6 @@ export type Actions
   | CreateAccountSuccessAction
   | LogoutAction
   | LogoutSuccessAction
-  | SetMessagesAction;
+  | SetMessagesAction
+  | SetSubdoaminAction
+  | CheckIfSubdoaminExistsAction;

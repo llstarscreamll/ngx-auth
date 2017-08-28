@@ -8,6 +8,7 @@ export interface State {
   loggedIn: boolean;
   loading: boolean;
   messages: AppMessage;
+  subdomain: string;
 }
 
 export const initialState: State = {
@@ -15,6 +16,7 @@ export const initialState: State = {
   loading: false,
   user: null,
   messages: null,
+  subdomain: null,
 };
 
 export function reducer(state = initialState, action: authActions.Actions): State {
@@ -27,7 +29,7 @@ export function reducer(state = initialState, action: authActions.Actions): Stat
     case authActions.LOGIN_SUCCESS: {
       const user = action.payload as AuthUser;
       return { ...state, loggedIn: true, loading: false, user: user, }
-    };
+    }
 
     case authActions.CREATE_ACCOUNT: {
       return { ...state, loading: true };
@@ -56,6 +58,10 @@ export function reducer(state = initialState, action: authActions.Actions): Stat
       }
 
       return { ...state, messages: msg, loading: false };
+    }
+
+    case authActions.SET_SUBDOMAIN: {
+      return { ...state, subdomain: action.payload, };
     }
 
     default: {

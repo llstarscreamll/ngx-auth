@@ -26,6 +26,9 @@ import { AuthAbstractComponent } from './../auth-abstract.component';
   #subdomain-label {
     width:48%;
   }
+
+  fieldset { margin-top: 25px; }
+  legend { color: #909090; }
 `]
 })
 export class RegisterComponent extends AuthAbstractComponent implements OnInit, OnDestroy {

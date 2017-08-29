@@ -18,6 +18,7 @@ export const ES = {
     'Create Account': 'Crear',
     // Validation Messages
     'required field': 'Este campo es obligatorio.',
-    'subdomain': 'url-de-empresa'
+    'subdomain': 'url-de-empresa',
+    'subdomain_field_help': 'URL fijada con base en nombre de empresa'
   }
 }

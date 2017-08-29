@@ -1,83 +1,132 @@
 <app-middle-box-layout>
   <h3 class="text-center" translate>AUTH.Register</h3>
 
-  <form [formGroup]="account" (ngSubmit)="submitForm()">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
 
     <app-alerts [appMessage]="messages$ | async"></app-alerts>
 
-    <div class="form-group has-feedback"
-      [class.has-error]="nameErrors.showErrors">
-      <input formControlName="name" type="text" class="form-control" placeholder="{{ 'AUTH.Full name' | translate}}">
-      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    <fieldset>
+      <legend>Información de empresa</legend>
       
-      <validation-errors
-        #nameErrors="validationErrors"
-        [reactiveForm]="account"
-        controlName="name"
-        [apiErrors]="(messages$ | async)?.errors"
-      ></validation-errors>
-    </div>
-
-    <div class="form-group has-feedback"
-      [class.has-error]="emailErrors.showErrors">
-      <input formControlName="email" type="email" class="form-control" placeholder="{{ 'AUTH.Email' | translate}}">
-      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-
-      <validation-errors
-        #emailErrors="validationErrors"
-        [reactiveForm]="account"
-        controlName="email"
-        [apiErrors]="(messages$ | async)?.errors"
-      ></validation-errors>
-    </div>
-
-    <div class="form-group has-feedback"
-      [class.has-error]="passwordErrors.showErrors">
-      <input formControlName="password" type="password" class="form-control" placeholder="{{ 'AUTH.Password' | translate}}">
-      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-
-      <validation-errors
-        #passwordErrors="validationErrors"
-        [reactiveForm]="account"
-        controlName="password"
-        [apiErrors]="(messages$ | async)?.errors"
-      ></validation-errors>
-    </div>
-
-    <div class="form-group has-feedback"
-      [class.has-error]="passwordConfirmationErrors.showErrors">
-      <input formControlName="password_confirmation" type="password" class="form-control" placeholder="{{ 'AUTH.Retype password' | translate}}">
-      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-
-      <validation-errors
-        #passwordConfirmationErrors="validationErrors"
-        [reactiveForm]="account"
-        controlName="password_confirmation"
-        [apiErrors]="(messages$ | async)?.errors"
-      ></validation-errors>
-    </div>
-
-    <div class="form-group has-feedback"
-      [class.has-error]="agreeTermsErrors.showErrors">
-      <div class="checkbox">
-        <label>
-          <input formControlName="agree_terms" type="checkbox" translate> <span [innerHTML]="'AUTH.I agree to the terms' | translate:{link:'#'}"></span>
-        </label>
+      <div class="form-group has-feedback"
+      [class.has-error]="companyNameErrors.showErrors">
+        <input formControlName="company_name" type="text" class="form-control control-lg" placeholder="{{ 'AUTH.company_name' | translate}}">
+        <span class="fa fa-building form-control-feedback"></span>
+        
+        <validation-errors
+          #companyNameErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="company_name"
+          [apiErrors]="(messages$ | async)?.errors"
+          ></validation-errors>
+      </div>
+  
+      <div class="form-group"
+      [class.has-error]="subdomainErrors.showErrors">
+        <input type="text"
+          id="subdomain"
+          class="form-control"
+          placeholder="{{ 'AUTH.subdomain' | translate }}"
+          [value]="subdomainFieldValue"
+          readonly="true"
+          formControlName="subdomain">
+        <!-- TODO: retreive the real app domain here!! -->
+        <label id="subdomain-label" class="control-label">.slabwebservices.com</label>
+        <!--
+          <input formControlName="subdomain" type="text" class="form-control control-lg" placeholder="{{ 'AUTH.subdomain' | translate}}">
+          <span class="fa fa-globe form-control-feedback"></span>
+        -->
+        
+        <validation-errors
+          #subdomainErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="subdomain"
+          [apiErrors]="(messages$ | async)?.errors"
+          ></validation-errors>
       </div>
 
-      <validation-errors
-        #agreeTermsErrors="validationErrors"
-        [reactiveForm]="account"
-        controlName="agree_terms"
-        [apiErrors]="(messages$ | async)?.errors"
-      ></validation-errors>
-    </div>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>Información de usuario</legend>
+
+      <div class="form-group has-feedback"
+        [class.has-error]="nameErrors.showErrors">
+        <input formControlName="name" type="text" class="form-control control-lg" placeholder="{{ 'AUTH.Full name' | translate}}">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        
+        <validation-errors
+          #nameErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="name"
+          [apiErrors]="(messages$ | async)?.errors"
+        ></validation-errors>
+      </div>
+  
+      <div class="form-group has-feedback"
+        [class.has-error]="emailErrors.showErrors">
+        <input formControlName="email" type="email" class="form-control control-lg" placeholder="{{ 'AUTH.Email' | translate}}">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+  
+        <validation-errors
+          #emailErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="email"
+          [apiErrors]="(messages$ | async)?.errors"
+        ></validation-errors>
+      </div>
+  
+      <div class="form-group has-feedback"
+        [class.has-error]="passwordErrors.showErrors">
+        <input formControlName="password" type="password" class="form-control control-lg" placeholder="{{ 'AUTH.Password' | translate}}">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+  
+        <validation-errors
+          #passwordErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="password"
+          [apiErrors]="(messages$ | async)?.errors"
+        ></validation-errors>
+      </div>
+  
+      <div class="form-group has-feedback"
+        [class.has-error]="passwordConfirmationErrors.showErrors">
+        <input formControlName="password_confirmation" type="password" class="form-control control-lg" placeholder="{{ 'AUTH.Retype password' | translate}}">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+  
+        <validation-errors
+          #passwordConfirmationErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="password_confirmation"
+          [apiErrors]="(messages$ | async)?.errors"
+        ></validation-errors>
+      </div>
+  
+      <div class="form-group has-feedback"
+        [class.has-error]="agreeTermsErrors.showErrors">
+        <div class="checkbox">
+          <label>
+            <input formControlName="agree_terms" type="checkbox" translate> <span [innerHTML]="'AUTH.I agree to the terms' | translate:{link:'#'}"></span>
+          </label>
+        </div>
+  
+        <validation-errors
+          #agreeTermsErrors="validationErrors"
+          [reactiveForm]="form"
+          controlName="agree_terms"
+          [apiErrors]="(messages$ | async)?.errors"
+        ></validation-errors>
+      </div>
+
+    </fieldset>
+
 
     <div class="row">
       <div class="form-group col-xs-12">
         <button
           type="submit"
-          [disabled]="!account.valid"
+          [disabled]="!form.valid"
           class="btn btn-lg btn-primary btn-block btn-flat"
           translate>AUTH.Create Account</button>
       </div>

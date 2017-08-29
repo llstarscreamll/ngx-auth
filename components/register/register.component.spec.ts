@@ -57,7 +57,7 @@ describe('RegisterComponent', () => {
   });
 
   it('should init with invalid reactive form and validation errors not shown', () => {
-    expect(component.account.valid).toBe(false, 'account reactive form invalid');
+    expect(component.form.valid).toBe(false, 'account reactive form invalid');
 
     // errors appear on .text-danger and .has-error elements
     expect(fixture.nativeElement.querySelector('.has-error')).toBeFalsy('no .has-errors elements');
@@ -66,7 +66,7 @@ describe('RegisterComponent', () => {
   });
 
   it('should dispath store action when form is submited', () => {
-    expect(component.account.valid).toBe(false, 'account reactive form invalid');
+    expect(component.form.valid).toBe(false, 'account reactive form invalid');
     expect(fixture.nativeElement.querySelector('form button:disabled')).toBeTruthy('form submit button disabled');
 
     const account = {
@@ -78,16 +78,16 @@ describe('RegisterComponent', () => {
     };
 
     // fill the form
-    component.account.patchValue(account);
-    component.account.markAsDirty();
-    component.account.markAsTouched();
+    component.form.patchValue(account);
+    component.form.markAsDirty();
+    component.form.markAsTouched();
 
     const store = fixture.debugElement.injector.get(Store);
     spyOn(store, 'dispatch');
 
     fixture.detectChanges();
 
-    expect(component.account.valid).toBe(true, 'form valid after filling');
+    expect(component.form.valid).toBe(true, 'form valid after filling');
     expect(fixture.nativeElement.querySelector('form button:disabled')).toBeFalsy('form submit button enabled');
 
     //submit the form

@@ -7,6 +7,7 @@ export const ES = {
     'Go to Lading Page': 'Ir a página principal',
     'Already have an account?': 'Ya tienes una cuenta?',
     // form fields
+    'company_name': 'Nombre Empresa',
     'Full name': 'Nombres',
     'Email': 'Correo',
     'Password': 'Contraseña',

@@ -35,7 +35,7 @@ export class AuthEffects {
     .map((action: Action) => action.payload)
     .switchMap((domain) => {
       return this.authService.checkIfDomainExists(domain)
-        .map(domain => { return new authActions.SetSubdoaminAction(domain); })
+        .map((domain: string) => { return new authActions.SetSubdoaminAction(domain); })
         .catch((error) => {
           const errorFormated = Object.assign({}, error, { type: 'danger' });
           return of(new authActions.SetMessagesAction(errorFormated));

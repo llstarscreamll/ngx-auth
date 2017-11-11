@@ -33,8 +33,8 @@ export class AuthEffects {
   checkIfSubdomainExists$: Observable<Action> = this.actions$
     .ofType(authActions.CHECK_IF_SUBDOMAIN_EXISTS)
     .map((action: Action) => action.payload)
-    .switchMap((domain) => {
-      return this.authService.checkIfDomainExists(domain)
+    .switchMap((domainStr) => {
+      return this.authService.checkIfDomainExists(domainStr)
         .map((domain: string) => { return new authActions.SetSubdoaminAction(domain); })
         .catch((error) => {
           const errorFormated = Object.assign({}, error, { type: 'danger' });
